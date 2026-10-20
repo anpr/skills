@@ -26,7 +26,7 @@ Follow these principles for ALL Langfuse work:
 1. **Documentation First**: NEVER implement based on memory. Always fetch current docs before writing code (Langfuse updates frequently) See the section below on how to access documentation.
 2. **CLI for Data Access**: Use `langfuse-cli` when querying/modifying Langfuse data. See the section below on how to use the CLI.
 3. **Best Practices by Use Case**: Read the relevant reference below use-case-specific guidelines before asking the user for more details or implementing.
-4. **Use latest Langfuse versions**: Unless the user specified otherwise or there's a good reason, always use the latest version of Langfuse SDKs/APIs. Even if you're only creating a plan for another agent to execute, be explicit about the exact version to use.
+4. **Use latest compatible Langfuse versions**: Unless the user specified otherwise or there's a good reason, use the latest Langfuse SDKs/APIs compatible with the running server. Even if you're only creating a plan for another agent to execute, be explicit about the exact version to use.
 5. **If you guide the user through UI** and are unsure about a label or location, inspect the user’s screenshots or ask to see the relevant screen. Do not assume UI labels have the exact same names as API, SDK, or CLI fields.
 
 
@@ -50,6 +50,8 @@ Follow these principles for ALL Langfuse work:
 ## 1. Langfuse API via CLI
 
 Use the `langfuse-cli` to interact with the full Langfuse REST API from the command line. Run via npx (no install required):
+
+For self-hosted deployments, select a server-compatible API snapshot before discovery or data access; follow [references/cli.md](references/cli.md#discovery).
 
 Start by discovering the schema and available arguments:
 
@@ -93,8 +95,8 @@ zsh -lc 'source ~/.zshenv >/dev/null 2>&1 || true; functions | grep -i "^[a-zA-Z
 If a helper function exists, prefer it for read-only CLI calls. Run the helper through the shell that defines it instead of retyping or printing the underlying env values. For zsh helpers in startup files, use `zsh -lc`:
 
 ```bash
-zsh -lc '<helper-name> traces list --help'
-zsh -lc '<helper-name> traces get --trace-id <trace-id> --json'
+zsh -lc '<helper-name> --api-version auto traces list --help'
+zsh -lc '<helper-name> --api-version auto observations list --trace-id <trace-id> --limit 1 --json'
 ```
 
 Never print full `LANGFUSE_PUBLIC_KEY` or `LANGFUSE_SECRET_KEY` values. If no env vars and no helper functions are found, then ask the user to configure credentials.
