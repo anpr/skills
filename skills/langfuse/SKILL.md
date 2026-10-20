@@ -44,6 +44,7 @@ Follow these principles for ALL Langfuse work:
 - systematic error analysis when requested directly or eval setup still lacks concrete failure modes after agent-led trace inspection: references/error-analysis.md
 - release-planning-agents PR review run reports from saved traces or artifacts: references/release-planning-pr-review-run-report.md
 - setting up CI/CD experiment gates with `langfuse/experiment-action`: references/ci-cd.md
+- optimizing the cost of an LLM application or AI agent: references/cost-optimization.md
 - submitting feedback about this skill: references/skill-feedback.md
 
 
